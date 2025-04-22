@@ -1,0 +1,23 @@
+port: 8080
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG
+spring:
+  application:
+    name: hello-social-auth
+  data:
+    mongodb:
+      database: hello
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: <client-id>
+            client-secret: <client-secretš>
+            scope: openid,profile,email
