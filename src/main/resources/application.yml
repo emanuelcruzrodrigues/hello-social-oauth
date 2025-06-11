@@ -1,4 +1,11 @@
 port: 8080
+server:
+  error:
+    whitelabel:
+      enabled: false
+    include-stacktrace: always
+    include-exception: true
+    include-message: always
 logging:
   level:
     org:
@@ -18,6 +25,13 @@ spring:
       client:
         registration:
           google:
-            client-id: <client-id>
-            client-secret: <client-secretš>
+            client-id: <GOOGLE_ID>
+            client-secret: <GOOGLE_SECRET>
             scope: openid,profile,email
+          github:
+            client-id: <GITHUB_ID>
+            client-secret: <GITHUB_SECRET>
+            scope: read:user, user:email
+steam:
+  api:
+    key: <STEAM_KEY>

@@ -11,8 +11,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String login(Model model, HttpServletRequest request) {
-        model.addAttribute("account", request.getSession().getAttribute("account"));
-        model.addAttribute("login", request.getSession().getAttribute("login"));
         return "index";
     }
 
