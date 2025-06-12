@@ -12,22 +12,26 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class LogoutHandler implements LogoutSuccessHandler {
 
-    @Value("${spring.security.oauth2.client.provider.okta.issuer-uri}")
-    private String oktaIssuer;
+    @Value("${spring.security.oauth2.client.provider.auth0.issuer-uri}")
+    private String auth0Issuer;
 
-    @Value("${spring.security.oauth2.client.registration.okta.client-id}")
-    private String oktaClientId;
+    @Value("${spring.security.oauth2.client.registration.auth0.client-id}")
+    private String auth0ClientId;
+
+    private static final List<String> LOGOUT_PROVIDERS = Arrays.asList("auth0", "okta");
 
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        if (authentication instanceof OAuth2AuthenticationToken
-                && "okta".equals(((OAuth2AuthenticationToken)authentication).getAuthorizedClientRegistrationId())) {
+        if (authentication instanceof OAuth2AuthenticationToken oAuth2AuthenticationToken
+                && "auth0".equals(oAuth2AuthenticationToken.getAuthorizedClientRegistrationId())) {
             String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-            response.sendRedirect(oktaIssuer + "v2/logout?client_id=" + oktaClientId + "&returnTo=" + baseUrl);
+            response.sendRedirect(auth0Issuer + "v2/logout?client_id=" + auth0ClientId + "&returnTo=" + baseUrl);
         } else {
             response.sendRedirect("/");
         }

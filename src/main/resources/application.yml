@@ -43,33 +43,53 @@ spring:
     oauth2:
       client:
         registration:
-          google:
-            client-id: ${google.client-id}
-            client-secret: ${google.client-secret}
-            scope: openid,profile,email
-          github:
-            client-id: ${github.client-id}
-            client-secret: ${github.client-secret}
-            scope: read:user, user:email
+          auth0:
+            client-id: ${auth0.client-id}
+            client-secret: ${auth0.client-secret}
+            scope: openid, profile, email
+            client-name: Auth0
+            provider: auth0
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+          azure:
+            client-id: ${microsoft.client-id}
+            client-secret: ${microsoft.client-secret}
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope: openid, profile, email
+            client-name: Microsoft
+            provider: azure
           facebook:
             client-id: ${facebook.client-id}
             client-secret: ${facebook.client-secret}
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
             scope: public_profile,email
+          github:
+            client-id: ${github.client-id}
+            client-secret: ${github.client-secret}
+            scope: read:user, user:email
+          google:
+            client-id: ${google.client-id}
+            client-secret: ${google.client-secret}
+            scope: openid,profile,email
           okta:
             client-id: ${okta.client-id}
             client-secret: ${okta.client-secret}
             scope: openid, profile, email
+            client-name: Okta
             provider: okta
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
         provider:
+          auth0:
+            issuer-uri: https://dev-13mcl0jb443tbcvk.us.auth0.com/
+          azure:
+            issuer-uri: https://login.microsoftonline.com/f0367572-4e3c-4d16-baef-e8ce1b40ef49/v2.0
           facebook:
             authorization-uri: https://www.facebook.com/v11.0/dialog/oauth
             token-uri: https://graph.facebook.com/v11.0/oauth/access_token
             user-info-uri: https://graph.facebook.com/me?fields=id,name,email,picture
             user-name-attribute: id
           okta:
-            issuer-uri: https://dev-13mcl0jb443tbcvk.us.auth0.com/
+            issuer-uri: https://dev-83791896.okta.com
 steam:
   api:
     key: ${steam.api-key}

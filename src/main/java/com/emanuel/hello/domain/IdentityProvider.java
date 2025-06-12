@@ -3,6 +3,8 @@ package com.emanuel.hello.domain;
 import java.util.Arrays;
 
 public enum IdentityProvider {
+    AUTH0,
+    AZURE,
     FACEBOOK,
     GITHUB,
     GOOGLE,
