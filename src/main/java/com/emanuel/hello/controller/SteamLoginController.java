@@ -70,12 +70,14 @@ public class SteamLoginController {
         securityContextRepository.saveContext(securityContext, request, response);
 
         Map<String, Object> playerSummary = steamService.getPlayerSummary(steamId);
+
         Map<String, Object> accountAttributes = new HashMap<>();
         accountAttributes.put("sub", steamId);
-        accountAttributes.put("email", playerSummary.get("personaname"));
+
         String realName = (String) playerSummary.get("realname");
-        String givenName = realName.split(" ")[0];
         accountAttributes.put("name", realName);
+
+        String givenName = realName.split(" ")[0];
         accountAttributes.put("given_name", givenName.trim());
         accountAttributes.put("family_name", realName.replace(givenName, "").trim());
 
@@ -84,6 +86,7 @@ public class SteamLoginController {
         accountService.updateListOfGames(account.getId());
 
         request.getSession().setAttribute("accountId", account.getId());
+        request.getSession().setAttribute("identityProvider", IdentityProvider.STEAM);
         return "redirect:/account";
     }
 

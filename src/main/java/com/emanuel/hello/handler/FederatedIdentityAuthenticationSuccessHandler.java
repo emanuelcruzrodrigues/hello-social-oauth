@@ -11,8 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
-import org.springframework.security.oauth2.core.OAuth2AccessToken;
-import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -33,10 +31,12 @@ public class FederatedIdentityAuthenticationSuccessHandler implements Authentica
         final DefaultOAuth2User userDetails = (DefaultOAuth2User) authentication.getPrincipal();
         log.info("The user {} has logged in.", userDetails.getName());
 
-        final Account account = accountService.register(IdentityProvider.get(token.getAuthorizedClientRegistrationId()), userDetails.getAttributes());
+        final IdentityProvider identityProvider = IdentityProvider.get(token.getAuthorizedClientRegistrationId());
+        final Account account = accountService.register(identityProvider, userDetails.getAttributes());
 
         final String contextPath = StringUtils.isBlank(request.getContextPath()) ? "/account" : request.getContextPath();
         request.getSession().setAttribute("accountId", account.getId());
+        request.getSession().setAttribute("identityProvider", identityProvider);
         response.sendRedirect(contextPath);
     }
 

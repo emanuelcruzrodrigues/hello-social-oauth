@@ -18,6 +18,7 @@ public class AccountController {
     public String login(Model model, HttpServletRequest request) {
         Account account = accountService.getAccount((String) request.getSession().getAttribute("accountId"));
         model.addAttribute("account", account);
+        model.addAttribute("identityProvider", request.getSession().getAttribute("identityProvider"));
         return "account";
     }
 }

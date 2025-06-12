@@ -43,7 +43,7 @@ public class GameProcessor {
                     }
                 }
                 try {
-                    log.info("No games to process");
+                    log.debug("No games to process");
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);

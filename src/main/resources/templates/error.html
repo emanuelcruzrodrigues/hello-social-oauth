@@ -1,35 +1,35 @@
-<html xmlns:th="<http://www.thymeleaf.org>">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello social auth</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-</head>
-<body>
+<!DOCTYPE html>
+<html
+        xmlns:th="<http://www.thymeleaf.org>"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/default}">
 
-<header th:insert="~{fragments/menu.html :: header}"></header>
+<div id="page" layout:fragment="content">
 
-<div class="container">
+    <div class="container-fluid">
 
-    <div class="jumbotron text-center">
+        <div class="jumbotron text-center">
 
-        <h1>Uh-oh! Something Happened!</h1>
+            <h1>Uh-oh! Something Happened!</h1>
 
-        <p th:if="${timestamp}" id='created'>
-            <b>Occurred:</b> <span th:text="${timestamp}">Timestamp</span>
-        </p>
+            <p th:if="${timestamp}" id='created'>
+                <b>Occurred:</b> <span th:text="${timestamp}">Timestamp</span>
+            </p>
 
-        <p th:text="${status}">Status Code</p>
-        <p th:text="${message}">Message</p>
-        <pre th:text="${stacktrace}">Stacktrace</pre>
+            <p>
+                <b>Status Code:</b> <span th:text="${status}">Status Code</span>
+            </p>
 
-        <button class="btn btn-primary btn-lg" onclick="history.back()">Go Back</button>
+            <p>
+                <b>Error Message:</b> <span th:text="${message}">Error Message</span>
+            </p>
+
+            <pre th:text="${stacktrace}">Stacktrace</pre>
+
+            <button class="btn btn-primary btn-lg" onclick="history.back()">Go Back</button>
+
+        </div>
 
     </div>
 
 </div>
-
-<footer th:insert="~{fragments/footer.html :: footer}"></footer>
-
-</body>
 </html>

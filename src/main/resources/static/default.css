@@ -1,0 +1,5 @@
+.container-fluid {
+  max-width: 90%; /* Or, use a percentage value as desired */
+  margin-left: auto;
+  margin-right: auto;
+}

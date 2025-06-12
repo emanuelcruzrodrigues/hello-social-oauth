@@ -1,37 +1,26 @@
-<html xmlns:th="<http://www.thymeleaf.org>">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello social auth</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-</head>
-<body>
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/default}">
 
-<header th:insert="~{fragments/menu.html :: header}"></header>
+<div id="page" layout:fragment="content">
+    <div class="container-fluid">
+        <div class="jumbotron">
+            <h1 class="display-4">Hello, Social Auth!</h1>
+            <p class="lead">This is a simple web application to test the oauth2 capabilities from different social providers.</p>
 
-<div class="container">
+            <hr class="my-4">
 
-    <div class="jumbotron">
-        <h1 class="display-4">Hello, Social Auth!</h1>
-        <p class="lead">This is a simple web application to test the oauth2 capabilities from different social providers.</p>
+            <p>Try to access the restricted area through the button bellow</p>
+            <a class="btn btn-primary btn-lg" href="/account" role="button">Access restricted area</a>
 
-        <hr class="my-4">
+            <hr class="my-4">
 
-        <p>Try to access the restricted area through the button bellow</p>
-        <a class="btn btn-primary btn-lg" href="/account" role="button">Access restricted area</a>
-
-        <hr class="my-4">
-
-        <p>Or try any of the different social providers listed bellow</p>
-        <a class="btn btn-secondary" href="/oauth2/authorization/google">Google</a>
-        <a class="btn btn-secondary" href="/oauth2/authorization/github">Github</a>
-        <a class="btn btn-secondary" href="/login/steam">Steam</a>
-
+            <p>Or try any of the different social providers listed bellow</p>
+            <a class="btn btn-secondary" href="/oauth2/authorization/facebook">Facebook</a>
+            <a class="btn btn-secondary" href="/oauth2/authorization/github">Github</a>
+            <a class="btn btn-secondary" href="/oauth2/authorization/google">Google</a>
+            <a class="btn btn-secondary" href="/oauth2/authorization/okta">Okta</a>
+            <a class="btn btn-secondary" href="/login/steam">Steam</a>
+        </div>
     </div>
-
 </div>
-
-<footer th:insert="~{fragments/footer.html :: footer}"></footer>
-
-</body>
 </html>

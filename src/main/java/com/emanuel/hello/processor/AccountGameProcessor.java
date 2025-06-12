@@ -63,7 +63,7 @@ public class AccountGameProcessor {
                     }
                 }
                 try {
-                    log.info("No accounts to process");
+                    log.debug("No accounts to process");
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);

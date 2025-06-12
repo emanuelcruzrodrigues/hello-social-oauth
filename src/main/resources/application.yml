@@ -8,11 +8,18 @@ server:
     include-message: always
 logging:
   level:
-    org.springframework.vault: DEBUG
-    org.springframework.cloud.vault: DEBUG
-    org.springframework.web.client.RestTemplate: DEBUG
+    com:
+      emanuel:
+        hello:
+          processor: INFO
     org:
       springframework:
+        vault: DEBUG
+        cloud:
+          vault: DEBUG
+        web:
+          client:
+            RestTemplate: DEBUG
         data:
           mongodb:
             core:
@@ -44,6 +51,25 @@ spring:
             client-id: ${github.client-id}
             client-secret: ${github.client-secret}
             scope: read:user, user:email
+          facebook:
+            client-id: ${facebook.client-id}
+            client-secret: ${facebook.client-secret}
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope: public_profile,email
+          okta:
+            client-id: ${okta.client-id}
+            client-secret: ${okta.client-secret}
+            scope: openid, profile, email
+            provider: okta
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+        provider:
+          facebook:
+            authorization-uri: https://www.facebook.com/v11.0/dialog/oauth
+            token-uri: https://graph.facebook.com/v11.0/oauth/access_token
+            user-info-uri: https://graph.facebook.com/me?fields=id,name,email,picture
+            user-name-attribute: id
+          okta:
+            issuer-uri: https://dev-13mcl0jb443tbcvk.us.auth0.com/
 steam:
   api:
     key: ${steam.api-key}
