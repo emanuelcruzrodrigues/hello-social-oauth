@@ -33,12 +33,21 @@ dependencies {
 	implementation 'org.openid4java:openid4java:1.0.0'
 	implementation("org.apache.commons:commons-lang3:3.17.0")
 	implementation("net.logstash.logback:logstash-logback-encoder:8.1")
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.cloud:spring-cloud-starter-vault-config'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:2024.0.1"
+	}
 }
 
 tasks.named('test') {
