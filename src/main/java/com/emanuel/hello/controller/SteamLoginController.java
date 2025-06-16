@@ -7,6 +7,7 @@ import com.emanuel.hello.service.SteamService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,18 +31,24 @@ public class SteamLoginController {
     private final SteamService steamService;
     private final AccountService accountService;
 
-    private static final String STEAM_LOGIN_URL = "https://steamcommunity.com/openid/login";
-    private static final String RETURN_TO_URL = "http://localhost:8080/login/steam/callback"; // Change to your URL
+    @Value("${steam.api.realm}")
+    private String steamApiRealm;
+
+    @Value("${steam.api.login}")
+    private String steamLoginUrl;
+
+    @Value("${steam.api.callback}")
+    private String steamCallback;
 
     @GetMapping("/login/steam")
     public void steamLogin(HttpServletResponse response) throws IOException {
         String nonce = UUID.randomUUID().toString();
 
-        String authUrl = STEAM_LOGIN_URL +
+        String authUrl = steamLoginUrl +
                 "?openid.ns=http://specs.openid.net/auth/2.0" +
                 "&openid.mode=checkid_setup" +
-                "&openid.return_to=" + RETURN_TO_URL +
-                "&openid.realm=http://localhost:8080/" + // Change to your domain
+                "&openid.return_to=" + steamCallback +
+                "&openid.realm=" + steamApiRealm +
                 "&openid.identity=http://specs.openid.net/auth/2.0/identifier_select" +
                 "&openid.claimed_id=http://specs.openid.net/auth/2.0/identifier_select";
 

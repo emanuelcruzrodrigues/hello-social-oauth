@@ -1,5 +1,11 @@
-port: 8080
 server:
+  port: 8443
+  ssl:
+      enabled: true
+      key-store: classpath:keystore.p12
+      key-store-password: ${ssl.keystore-password}
+      key-store-type: PKCS12
+      key-alias: emanuel
   error:
     whitelabel:
       enabled: false
@@ -14,6 +20,7 @@ logging:
           processor: INFO
     org:
       springframework:
+        security: DEBUG
         vault: DEBUG
         cloud:
           vault: DEBUG
@@ -92,4 +99,7 @@ spring:
             issuer-uri: https://dev-83791896.okta.com
 steam:
   api:
+    realm: https://localhost:8443/
+    login: https://steamcommunity.com/openid/login
+    callback: https://localhost:8443/login/steam/callback
     key: ${steam.api-key}
