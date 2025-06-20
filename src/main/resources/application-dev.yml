@@ -1,0 +1,36 @@
+server:
+  forward-headers-strategy: framework
+  port: 8443
+  ssl:
+      enabled: true
+      key-store: classpath:keystore.p12
+      key-store-password: ${ssl.keystore-password}
+      key-store-type: PKCS12
+      key-alias: emanuel
+  error:
+    whitelabel.enabled: false
+    include-stacktrace: always
+    include-exception: true
+    include-message: always
+logging:
+  level:
+    com.emanuel.hello.processor: INFO
+    org:
+      springframework:
+        security: DEBUG
+        vault: DEBUG
+        cloud.vault: DEBUG
+        web.client.RestTemplate: DEBUG
+        data.mongodb.core.MongoTemplate: DEBUG
+spring:
+  cloud:
+    vault:
+      kv:
+        default-context: hello-social-oauth/dev
+  data:
+    mongodb:
+      database: hello-social-oauth-dev
+      uri: mongodb://192.168.1.53:27017/
+steam:
+  api:
+    key: ${steam.api-key}

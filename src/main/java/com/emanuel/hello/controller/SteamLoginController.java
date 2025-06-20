@@ -4,6 +4,7 @@ import com.emanuel.hello.domain.Account;
 import com.emanuel.hello.domain.IdentityProvider;
 import com.emanuel.hello.service.AccountService;
 import com.emanuel.hello.service.SteamService;
+import com.emanuel.hello.utils.BaseUrl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @Controller
@@ -31,24 +31,19 @@ public class SteamLoginController {
     private final SteamService steamService;
     private final AccountService accountService;
 
-    @Value("${steam.api.realm}")
-    private String steamApiRealm;
-
     @Value("${steam.api.login}")
     private String steamLoginUrl;
 
-    @Value("${steam.api.callback}")
-    private String steamCallback;
-
     @GetMapping("/login/steam")
-    public void steamLogin(HttpServletResponse response) throws IOException {
-        String nonce = UUID.randomUUID().toString();
+    public void steamLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        String baseUrl = BaseUrl.getBaseUrl(request);
 
         String authUrl = steamLoginUrl +
                 "?openid.ns=http://specs.openid.net/auth/2.0" +
                 "&openid.mode=checkid_setup" +
-                "&openid.return_to=" + steamCallback +
-                "&openid.realm=" + steamApiRealm +
+                "&openid.return_to=" + baseUrl + "login/steam/callback" +
+                "&openid.realm=" + baseUrl +
                 "&openid.identity=http://specs.openid.net/auth/2.0/identifier_select" +
                 "&openid.claimed_id=http://specs.openid.net/auth/2.0/identifier_select";
 

@@ -1,6 +1,5 @@
 plugins {
 	id 'java'
-	id 'war'
 	id 'org.springframework.boot' version '3.4.4'
 	id 'io.spring.dependency-management' version '1.1.7'
 }
@@ -12,6 +11,10 @@ java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(21)
 	}
+}
+
+bootJar {
+	archiveFileName = 'hello-social-oauth.jar'
 }
 
 configurations {
@@ -38,7 +41,6 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-vault-config'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
