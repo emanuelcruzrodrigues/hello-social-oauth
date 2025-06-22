@@ -48,9 +48,9 @@ public class AccountService{
 
     private Account createOrUpdateAccount(IdentityProvider identityProvider, Map<String, Object> attributes, String subjectId) {
 
-        //dumb correlation rule: if already exists an account with the same given name, so it is the same person
+        //dumb correlation rule: if already exists an account with the same name, so it is the same person
         final Person person = createPerson(attributes);
-        Account account = accountRepository.getByPersonGivenName(person.getGivenName());
+        Account account = accountRepository.getByPersonName(person.getName());
 
         if (account == null) {
             account = new Account();

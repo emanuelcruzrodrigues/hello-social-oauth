@@ -7,8 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@Repository
-public class GameRepositoryInMemoryImpl {
+public class GameRepositoryInMemoryImpl implements GameRepository {
 
     private final Map<String, Game> data = new HashMap<>();
 
@@ -16,8 +15,9 @@ public class GameRepositoryInMemoryImpl {
         return Optional.ofNullable(data.get(gameId));
     }
 
-    public void save(Game game) {
+    public Game save(Game game) {
         data.put(game.getId(), game);
+        return game;
     }
 
     public boolean existsById(String gameId) {

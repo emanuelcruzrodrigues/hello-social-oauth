@@ -1,8 +1,13 @@
 package com.emanuel.hello.repository;
 
 import com.emanuel.hello.domain.Game;
-import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface GameRepository extends MongoRepository<Game, String> {
+import java.util.Optional;
 
+public interface GameRepository {
+    Optional<Game> findById(String gameId);
+
+    Game save(Game game);
+
+    boolean existsById(String gameId);
 }

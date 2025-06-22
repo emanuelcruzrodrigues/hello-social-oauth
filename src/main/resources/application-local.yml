@@ -26,6 +26,7 @@ spring:
       kv:
         default-context: hello-social-oauth/local
   data:
+    strategy: MONGO
     mongodb:
       database: hello-social-oauth-local
       uri: mongodb://localhost:27017/

@@ -16,6 +16,7 @@ logging:
         data.mongodb.core.MongoTemplate: INFO
 spring:
   data:
+    strategy: MONGO
     mongodb:
       database: hello-social-oauth
       uri: ${mongo_connection_string}

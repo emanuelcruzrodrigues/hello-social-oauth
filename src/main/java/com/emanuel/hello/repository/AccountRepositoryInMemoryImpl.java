@@ -11,11 +11,11 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Repository
-public class AccountRepositoryInMemoryImpl {
+public class AccountRepositoryInMemoryImpl implements AccountRepository {
 
     private final Map<String, Account> data = new HashMap<>();
 
+    @Override
     public List<Account> findBySocialAuthenticator(String subjectId, IdentityProvider identityProvider) {
         return data
                 .values()
@@ -28,23 +28,27 @@ public class AccountRepositoryInMemoryImpl {
                 ).collect(Collectors.toList());
     }
 
-    public Account getByPersonGivenName(String givenName) {
-        if (givenName == null) return null;
+    @Override
+    public Account getByPersonName(String name) {
+        if (name == null) return null;
         return data
                 .values()
                 .stream()
                 .filter(account -> {
-                    String personGivenName = account.getPerson().getGivenName();
-                    return personGivenName != null && StringUtils.equalsIgnoreCase(personGivenName, givenName);
+                    String personName = account.getPerson().getName();
+                    return personName != null && StringUtils.equalsIgnoreCase(personName, name);
                 })
                 .findFirst()
                 .orElse(null);
     }
 
-    public void save(Account account) {
+    @Override
+    public Account save(Account account) {
         data.put(account.getId(), account);
+        return account;
     }
 
+    @Override
     public Optional<Account> findById(String id) {
         return Optional.ofNullable(data.get(id));
     }
