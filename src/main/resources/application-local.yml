@@ -18,8 +18,6 @@ logging:
     org:
       springframework:
         security: DEBUG
-        vault: DEBUG
-        cloud.vault: DEBUG
         web.client.RestTemplate: DEBUG
         data.mongodb.core.MongoTemplate: DEBUG
 spring:
@@ -31,6 +29,3 @@ spring:
     mongodb:
       database: hello-social-oauth-local
       uri: mongodb://localhost:27017/
-steam:
-  api:
-    key: ${steam.api-key}

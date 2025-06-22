@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t hello-social-oauth .
+docker build -t emanuelrodrigues/hello-social-oauth .

@@ -1,0 +1,21 @@
+server:
+  forward-headers-strategy: framework
+  port: 8080
+  error:
+    whitelabel.enabled: false
+    include-stacktrace: always
+    include-exception: true
+    include-message: always
+logging:
+  level:
+    com.emanuel.hello.processor: INFO
+    org:
+      springframework:
+        security: INFO
+        web.client.RestTemplate: INFO
+        data.mongodb.core.MongoTemplate: INFO
+spring:
+  data:
+    mongodb:
+      database: hello-social-oauth
+      uri: ${mongo_connection_string}
