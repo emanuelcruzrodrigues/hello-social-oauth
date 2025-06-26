@@ -19,24 +19,24 @@ A Spring Boot application providing OAuth2 client authentication, web interface,
 ## Setup
 
 1. **Clone the repository:**
-   ```
-   git clone <URL>
-   ```
-3. **Configure application properties:**
+```
+git clone <URL>
+```
+2. **Configure application properties:**
    - Edit `src/main/resources/application-local.properties` to set up your OAuth2 providers.
 
-4. **Build the project:**
-   ```
-   ./gradlew build
-   ```
-5. **Run the application:**
-  ```
-   ./gradlew bootRun
-  ```
-6. **Or run the jar:**
-  ```
-   java -jar build/libs/hello-social-oauth.jar
-  ```
+3. **Build the project:**
+```
+./gradlew build
+```
+4. **Run the application:**
+```
+./gradlew bootRun
+```
+5. **Or run the jar:**
+```
+java -jar build/libs/hello-social-oauth.jar
+```
 ## License
 
 This project is licensed under the MIT License.
