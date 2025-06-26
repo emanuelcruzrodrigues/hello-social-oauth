@@ -18,10 +18,10 @@ import java.util.List;
 @Component
 public class LogoutHandler implements LogoutSuccessHandler {
 
-    @Value("${spring.security.oauth2.client.provider.auth0.issuer-uri}")
+    @Value("${spring.security.oauth2.client.provider.auth0.issuer-uri:replace-me}")
     private String auth0Issuer;
 
-    @Value("${spring.security.oauth2.client.registration.auth0.client-id}")
+    @Value("${spring.security.oauth2.client.registration.auth0.client-id:replace-me}")
     private String auth0ClientId;
 
     private static final List<String> LOGOUT_PROVIDERS = Arrays.asList("auth0", "okta");

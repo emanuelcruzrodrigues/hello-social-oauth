@@ -23,8 +23,8 @@ public class HcpSecretsEnvironmentInitializer implements ApplicationContextIniti
         String projectId = System.getenv("HCP_PROJECT_ID");
         String appName = System.getenv("HCP_APP_NAME");
 
-        if (clientId == null || clientSecret == null) {
-            log.error("HCP_CLIENT_ID or HCP_CLIENT_SECRET environment variables are missing.");
+        if (clientId == null || clientSecret == null || orgId == null || projectId == null || appName == null) {
+            log.warn("HCP environment variables are missing.");
             return;
         }
 

@@ -1,6 +1,12 @@
 server:
   forward-headers-strategy: framework
-  port: 8080
+  port: 8443
+  ssl:
+    enabled: true
+    key-store: classpath:keystore.p12
+    key-store-password: ${ssl_keystore_password}
+    key-store-type: PKCS12
+    key-alias: emanuel
   error:
     whitelabel.enabled: false
     include-stacktrace: always
@@ -11,9 +17,9 @@ logging:
     com.emanuel.hello.processor: INFO
     org:
       springframework:
-        security: INFO
-        web.client.RestTemplate: INFO
-        data.mongodb.core.MongoTemplate: INFO
+        security: DEBUG
+        web.client.RestTemplate: DEBUG
+        data.mongodb.core.MongoTemplate: DEBUG
 spring:
   security:
     oauth2:

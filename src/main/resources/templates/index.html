@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/default}">
+<html xmlns:th="<http://www.thymeleaf.org>"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/default}"
+>
 
 <div id="page" layout:fragment="content">
     <div class="container-fluid">
@@ -15,13 +17,25 @@
             <hr class="my-4">
 
             <p>Or try any of the different social providers listed bellow</p>
-            <a class="btn btn-secondary" href="/oauth2/authorization/auth0">Auth0</a>
-            <a class="btn btn-secondary" href="/oauth2/authorization/facebook">Facebook</a>
-            <a class="btn btn-secondary" href="/oauth2/authorization/github">Github</a>
-            <a class="btn btn-secondary" href="/oauth2/authorization/google">Google</a>
-            <a class="btn btn-secondary" href="/oauth2/authorization/azure">Microsoft Azure</a>
-            <a class="btn btn-secondary" href="/oauth2/authorization/okta">Okta</a>
-            <a class="btn btn-secondary" href="/login/steam">Steam</a>
+
+            <a th:if="${auth0 != null}" class="btn btn-secondary" href="/oauth2/authorization/auth0">Auth0</a>
+
+            <a th:if="${facebook != null}"
+               class="btn btn-secondary"
+               href="/oauth2/authorization/facebook"
+               onclick="return confirm('Facebook authentication is only available for registered testers. Do you want to continue?');">
+                Facebook
+            </a>
+
+            <a th:if="${github != null}" class="btn btn-secondary" href="/oauth2/authorization/github">Github</a>
+
+            <a th:if="${google != null}" class="btn btn-secondary" href="/oauth2/authorization/google">Google</a>
+
+            <a th:if="${azure != null}" class="btn btn-secondary" href="/oauth2/authorization/azure">Microsoft Azure</a>
+
+            <a th:if="${okta != null}" class="btn btn-secondary" href="/oauth2/authorization/okta">Okta</a>
+
+            <a th:if="${steam != null}" class="btn btn-secondary" href="/login/steam">Steam</a>
         </div>
     </div>
 </div>
